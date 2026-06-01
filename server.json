@@ -1,0 +1,29 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.mambabuilt/mcp-job-board-keyword-signal-scanner",
+  "description": "Scans Greenhouse, Lever, Ashby, Workday, Rippling for roles in any category. Clay-ready.",
+  "version": "1.0.1",
+  "repository": {
+    "url": "https://github.com/mambalabsdev/mcp-job-board-keyword-signal-scanner",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@mambalabsdev/mcp-job-board-keyword-signal-scanner",
+      "version": "1.0.1",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "APIFY_TOKEN",
+          "description": "Apify API token from https://console.apify.com/account/integrations",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
