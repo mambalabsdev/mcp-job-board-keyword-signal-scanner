@@ -1,0 +1,42 @@
+{
+  "name": "@mambalabsdev/mcp-job-board-keyword-signal-scanner",
+  "version": "1.0.0",
+  "description": "MCP server for Job Board Keyword Signal Scanner. Scans Greenhouse, Lever, Ashby, Workday, and Rippling for roles in any category via Apify. Clay-ready output.",
+  "type": "module",
+  "bin": {
+    "mcp-job-board-keyword-signal-scanner": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod +x build/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "gtm",
+    "job-board",
+    "hiring",
+    "ats",
+    "apify",
+    "clay",
+    "lead-generation"
+  ],
+  "author": "Mamba Labs <labs@mambamindsetgrowth.com>",
+  "license": "MIT",
+  "homepage": "https://apify.com/mambalabs/job-board-keyword-signal-scanner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mambalabsdev/mcp-job-board-keyword-signal-scanner"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.6.0"
+  }
+}
