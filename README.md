@@ -54,6 +54,31 @@ Get your token at https://console.apify.com/account/integrations, paste it in, a
 
 The tool returns the actor's flat JSON row for the scanned company, including matched role counts and titles per requested category, the ATS platform detected, and optional change tracking. See the Apify Store page for the full output schema.
 
+## Example output
+
+```json
+{
+  "company_domain": "figma.com",
+  "hiring_signal": true,
+  "ats_platform": "greenhouse",
+  "categories_searched": [
+    "Engineering"
+  ],
+  "matched_role_count": 8,
+  "signal_strength": "high",
+  "top_matched_role": "Staff Engineer",
+  "most_recent_posting_date": "2026-05-27",
+  "run_date": "2026-05-28"
+}
+```
+
+## Features
+
+- Configurable role categories: GTM, Engineering, Finance, Operations, Executive, Custom
+- User-defined keyword arrays for custom scanning
+- Per-category counts via roles_by_category, with category-level signal scoring
+- Same ATS cascade as the Hiring Signal Scraper
+
 ## Full actor documentation
 
 This server is a thin client and holds no scanning logic. For the complete input and output reference, pricing, and run history, see the Apify Store page:
