@@ -1,5 +1,7 @@
 # Job Board Keyword Signal Scanner MCP Server
 
+[![Smithery](https://smithery.ai/badge/mambabuilt/mcp-job-board-keyword-signal-scanner)](https://smithery.ai/servers/mambabuilt/mcp-job-board-keyword-signal-scanner)
+
 An MCP server that scans a company's job board for the roles you care about. It wraps the Mamba Labs Job Board Keyword Signal Scanner actor on Apify and returns a Clay-ready flat JSON row to any MCP client.
 
 ## What it does
