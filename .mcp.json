@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mamba-job-board-scanner": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mambalabsdev/mcp-job-board-keyword-signal-scanner"
+      ],
+      "env": {
+        "APIFY_TOKEN": "your-apify-token"
+      }
+    }
+  }
+}
