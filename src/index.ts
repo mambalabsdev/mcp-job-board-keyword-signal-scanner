@@ -25,10 +25,20 @@ const server = new McpServer({
   version: pkg.version,
 });
 
-server.tool(
+server.registerTool(
   "scan_job_board_keywords",
-  "Scan a company's job board for roles in chosen categories across Greenhouse, Lever, Ashby, Workday, and Rippling. Pick from GTM, Engineering, Finance, Operations, Executive, or supply custom keywords. Returns a flat, Clay-ready JSON row of matched role counts and titles per category.",
   {
+    title: "Scan Job Board Keywords",
+    description:
+      "Scan a company's job board for roles in chosen categories across Greenhouse, Lever, Ashby, Workday, and Rippling. Pick from GTM, Engineering, Finance, Operations, Executive, or supply custom keywords. Returns a flat, Clay-ready JSON row of matched role counts and titles per category. Read-only; requires an APIFY_TOKEN and consumes Apify credits per call.",
+    annotations: {
+      title: "Scan Job Board Keywords",
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: true,
+    },
+    inputSchema: {
     company_domain: z
       .string()
       .describe(
@@ -61,6 +71,7 @@ server.tool(
       .string()
       .optional()
       .describe("ISO date of the previous run, e.g. 2026-03-15. Used for tracking changes over time."),
+  },
   },
   async ({
     company_domain,

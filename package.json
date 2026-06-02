@@ -1,6 +1,6 @@
 {
   "name": "@mambalabsdev/mcp-job-board-keyword-signal-scanner",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "MCP server for Job Board Keyword Signal Scanner. Scans Greenhouse, Lever, Ashby, Workday, and Rippling for roles in any category via Apify. Clay-ready output.",
   "type": "module",
   "bin": {
