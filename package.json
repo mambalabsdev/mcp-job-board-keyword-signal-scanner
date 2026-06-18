@@ -36,7 +36,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/node": "^20.14.0",
+    "@types/node": "^25.9.3",
     "typescript": "^5.6.0"
   },
   "mcpName": "com.mambabuilt/mcp-job-board-keyword-signal-scanner"
