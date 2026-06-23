@@ -4,6 +4,20 @@
 
 An MCP server that scans a company's job board for the roles you care about. It wraps the Mamba Labs Job Board Keyword Signal Scanner actor on Apify and returns a Clay-ready flat JSON row to any MCP client.
 
+## What's Inside
+
+- [What it does](#what-it-does)
+- [Quick start](#quick-start)
+- [Prerequisites](#prerequisites)
+- [Example prompts](#example-prompts)
+- [Inputs](#inputs)
+- [Output](#output)
+- [Example output](#example-output)
+- [Features](#features)
+- [Full actor documentation](#full-actor-documentation)
+- [Mamba Labs GTM Suite](#mamba-labs-gtm-suite)
+- [License](#license)
+
 ## What it does
 
 Give it a company domain and a set of role categories, and it scans Greenhouse, Lever, Ashby, Workday, and Rippling for matching open roles. Pick from GTM, Engineering, Finance, Operations, Executive, or pass your own custom keywords. You get back a flat row of matched role counts and titles per category, ready for Clay, a CRM, or an AI agent workflow. All of the scanning runs on Apify. This package is a thin client that calls the actor and hands back the result.
