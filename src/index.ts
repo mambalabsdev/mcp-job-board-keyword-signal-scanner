@@ -45,9 +45,13 @@ server.registerTool(
         "Bare company domain without https:// and without a trailing slash. Example: stripe.com",
       ),
     role_categories: z
-      .array(z.string())
+      .array(z.enum([
+        "GTM", "Engineering", "Finance", "Operations", "Executive",
+        "Marketing", "HR", "CustomerSuccess", "Data", "Product", "Legal", "Design",
+        "Custom",
+      ]))
       .describe(
-        "One or more role categories to scan for. Valid values: GTM, Engineering, Finance, Operations, Executive, Custom. Use Custom together with custom_keywords.",
+        "One or more role categories to scan for. Twelve categories plus Custom, which is used together with custom_keywords. Matching on the actor side is case insensitive and ignores separators, so customer_success and Customer Success both reach CustomerSuccess, and sales resolves to GTM.",
       ),
     custom_keywords: z
       .array(z.string())

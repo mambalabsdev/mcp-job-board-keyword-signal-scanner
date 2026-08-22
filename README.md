@@ -59,7 +59,7 @@ Get your token at https://console.apify.com/account/integrations, paste it in, a
 ## Inputs
 
 - `company_domain` (required): the bare company domain, no `https://` and no trailing slash. Example: `stripe.com`
-- `role_categories` (required): one or more of GTM, Engineering, Finance, Operations, Executive, Custom.
+- `role_categories` (required): one or more of GTM, Engineering, Finance, Operations, Executive, Marketing, HR, CustomerSuccess, Data, Product, Legal, Design, or Custom. Matching is case insensitive and ignores separators, so `customer_success` and `Customer Success` both work, and `sales` resolves to GTM.
 - `custom_keywords` (optional): keyword strings to match when Custom is included.
 - `enable_fallback` (optional): fall back to a pre-indexed job database when the live ATS cascade finds nothing.
 - `previous_roles_detected` and `previous_run_date` (optional): pass a prior run's results to compute newly added or removed roles over time.
