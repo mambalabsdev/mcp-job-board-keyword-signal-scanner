@@ -1,11 +1,16 @@
 {
   "name": "@mambalabsdev/mcp-job-board-keyword-signal-scanner",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "MCP server for Job Board Keyword Signal Scanner. Scans Greenhouse, Lever, Ashby, Workday, and Rippling for roles in any category via Apify. Clay-ready output.",
   "type": "module",
   "bin": {
     "mcp-job-board-keyword-signal-scanner": "./build/index.js"
   },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc && chmod +x build/index.js",
     "prepublishOnly": "npm run build"
@@ -33,10 +38,10 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
-    "zod": "^3.23.8"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@types/node": "^20.14.0",
+    "@types/node": "^26.2.0",
     "typescript": "^5.6.0"
   },
   "mcpName": "com.mambabuilt/mcp-job-board-keyword-signal-scanner"
