@@ -14,6 +14,7 @@ An MCP server that scans a company's job board for the roles you care about. It 
 - [Output](#output)
 - [Example output](#example-output)
 - [Features](#features)
+- [Pricing](#pricing)
 - [How each call runs](#how-each-call-runs)
 - [Full actor documentation](#full-actor-documentation)
 - [Mamba Labs GTM Suite](#mamba-labs-gtm-suite)
@@ -69,6 +70,7 @@ Every input the tool accepts, generated from the server's own tool list.
 | `enable_fallback` | boolean | no | If true, falls back to a pre-indexed job database when the live ATS cascade finds nothing. |
 | `previous_roles_detected` | string | no | Comma-separated matched role titles from a previous run, used to compute newly added or removed roles. |
 | `previous_run_date` | string | no | ISO date of the previous run, e.g. 2026-03-15. Used for tracking changes over time. |
+| `max_charge_usd` | number | no | Optional spending cap for this call, in USD. The actor stops before any charge that would take the run past this amount and keeps every row already charged. |
 
 ## Output
 
@@ -99,6 +101,17 @@ The tool returns the actor's flat JSON row for the scanned company, including ma
 - Per-category counts via roles_by_category, with category-level signal scoring
 - Same ATS cascade as the Hiring Signal Scraper
 
+## Pricing
+
+You pay per event on Apify, billed to your own Apify account. Prices from the live pricing record, read 2026-10-16:
+
+| Event | Price per event (USD) | Fires when |
+| --- | --- | --- |
+| `apify-default-dataset-item` | $0.05 on the Free plan, down to $0.0425 on higher Apify plans | Single result in the default dataset. |
+| `apify-actor-start` | $0.00005 | Charged when the Actor starts running. Number of events charged depends on Actor memory (one event per GB, minimum one event). |
+
+The [actor's Apify page](https://apify.com/mambalabs/job-board-keyword-signal-scanner) carries the current prices. Running this server consumes Apify credits.
+
 ## How each call runs
 
 Each call starts the actor run, polls it until it finishes, then reads the dataset. The run is allowed 1,800 seconds. If the run is still going when this call stops waiting, the call returns the run id and a console link instead of a timeout, so the result is never lost.
@@ -113,7 +126,7 @@ https://apify.com/mambalabs/job-board-keyword-signal-scanner
 
 ## Mamba Labs GTM Suite
 
-This server is one of 54 Mamba Labs MCP servers, each backed by a dedicated Apify actor and published under [@mambalabsdev on npm](https://www.npmjs.com/org/mambalabsdev). The ones closest to this server:
+This server is one of 58 Mamba Labs MCP servers, each backed by a dedicated Apify actor and published under [@mambalabsdev on npm](https://www.npmjs.com/org/mambalabsdev). The ones closest to this server:
 
 | Actor | Immutable Actor ID |
 |---|---|
