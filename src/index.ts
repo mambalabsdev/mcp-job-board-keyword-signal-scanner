@@ -6,6 +6,16 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
 
+// Optional per call spending cap, passed through to the actor's own max_charge_usd
+// input. The actor enforces it; this wrapper only forwards it when set.
+const MAX_CHARGE_USD = z
+  .number()
+  .min(0)
+  .optional()
+  .describe(
+    "Optional spending cap for this call, in USD, passed to the actor as max_charge_usd. The run stops before any charge that would take it past this amount and keeps every row already charged. Leave empty to rely only on the maximum charge per run set on your Apify account.",
+  );
+
 const here = dirname(fileURLToPath(import.meta.url));
 const pkg = JSON.parse(
   readFileSync(join(here, "..", "package.json"), "utf8"),
@@ -58,7 +68,9 @@ async function runActor(
   actorPath: string,
   actorLabel: string,
   input: Record<string, unknown>,
+  maxChargeUsd?: number,
 ): Promise<ToolResult> {
+  if (maxChargeUsd !== undefined) input = { ...input, max_charge_usd: maxChargeUsd };
   const APIFY_TOKEN = process.env.APIFY_TOKEN;
   if (!APIFY_TOKEN) {
     return { isError: true, content: [{ type: "text", text: "APIFY_TOKEN is not set. Create a token at https://console.apify.com/account/integrations and set it as the APIFY_TOKEN environment variable." }] };
@@ -200,10 +212,10 @@ server.registerTool(
   {
     title: "Scan Job Board Keywords",
     description:
-      "Scan a company's job board for roles in chosen categories across Greenhouse, Lever, Ashby, Workday, and Rippling. Pick from GTM, Engineering, Finance, Operations, Executive, or supply custom keywords. Returns a flat, Clay-ready JSON row of matched role counts and titles per category. Read-only; requires an APIFY_TOKEN and consumes Apify credits per call.",
+      "Scan a company's job board for roles in chosen categories across Greenhouse, Lever, Ashby, Workday, and Rippling. Pick from GTM, Engineering, Finance, Operations, Executive, or supply custom keywords. Returns a flat, Clay-ready JSON row of matched role counts and titles per category. Reads public data and writes nothing; requires an APIFY_TOKEN and consumes Apify credits per call.",
     annotations: {
       title: "Scan Job Board Keywords",
-      readOnlyHint: true,
+      readOnlyHint: false,
       destructiveHint: false,
       idempotentHint: true,
       openWorldHint: true,
@@ -245,6 +257,7 @@ server.registerTool(
       .string()
       .optional()
       .describe("ISO date of the previous run, e.g. 2026-03-15. Used for tracking changes over time."),
+      max_charge_usd: MAX_CHARGE_USD,
   },
   },
   async ({
@@ -254,6 +267,7 @@ server.registerTool(
     enable_fallback,
     previous_roles_detected,
     previous_run_date,
+    max_charge_usd,
   }) => {
     const input: Record<string, unknown> = { company_domain, role_categories };
     if (custom_keywords !== undefined) input.custom_keywords = custom_keywords;
@@ -261,7 +275,7 @@ server.registerTool(
     if (previous_roles_detected !== undefined) input.previous_roles_detected = previous_roles_detected;
     if (previous_run_date !== undefined) input.previous_run_date = previous_run_date;
 
-    return runActor("4DvqpvhMR74NLcDDY", "Job Board Keyword Signal Scanner", input);
+    return runActor("4DvqpvhMR74NLcDDY", "Job Board Keyword Signal Scanner", input, max_charge_usd);
   },
 );
 
